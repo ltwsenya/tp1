@@ -8,7 +8,7 @@
 class FamilyMember {
 public:
     FamilyMember();
-    FamilyMember(const std::string& name, const std::string& birthDate, const std::string& deathDate = "");
+    FamilyMember(const std::string& firstName, const std::string& lastName, const std::string& patronymic, const std::string& birthDate, const std::string& deathDate = "alive");
     FamilyMember(const FamilyMember& other);
     ~FamilyMember();
 
@@ -16,14 +16,18 @@ public:
     void save(std::ostream& out) const;
     void load(std::istream& in);
 
-    void setName(const std::string& name);
+    void setFirstName(const std::string& firstName);
+    void setLastName(const std::string& lastName);
+    void setPatronymic(const std::string& patronymic);
     void setBirthDate(const std::string& birthDate);
     void setDeathDate(const std::string& deathDate);
     void setParents(const std::vector<FamilyMember*>& parents);
     void setSpouse(FamilyMember* spouse);
     void setChildren(const std::vector<FamilyMember*>& children);
 
-    std::string getName() const;
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    std::string getPatronymic() const;
     std::string getBirthDate() const;
     std::string getDeathDate() const;
     std::vector<FamilyMember*> getParents() const;
@@ -32,7 +36,9 @@ public:
     int getAge() const;
 
 private:
-    std::string name;
+    std::string firstName;
+    std::string lastName;
+    std::string patronymic;
     std::string birthDate;
     std::string deathDate;
     std::vector<FamilyMember*> parents;
