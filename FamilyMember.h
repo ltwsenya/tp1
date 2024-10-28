@@ -35,6 +35,9 @@ public:
     std::vector<FamilyMember*> getChildren() const;
     int getAge() const;
 
+    // Сделаем метод calculateAge публичным
+    int calculateAge() const;
+
 private:
     std::string firstName;
     std::string lastName;
@@ -44,8 +47,6 @@ private:
     std::vector<FamilyMember*> parents;
     FamilyMember* spouse;
     std::vector<FamilyMember*> children;
-
-    int calculateAge() const;
 };
 
 #endif // FAMILYMEMBER_H

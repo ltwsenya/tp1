@@ -2,16 +2,25 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <iostream>
 
-FamilyMember::FamilyMember() : firstName(""), lastName(""), patronymic(""), birthDate(""), deathDate("alive"), spouse(nullptr) {}
+FamilyMember::FamilyMember() : firstName(""), lastName(""), patronymic(""), birthDate(""), deathDate("alive"), spouse(nullptr) {
+    std::cout << "FamilyMember default constructor called" << std::endl;
+}
 
 FamilyMember::FamilyMember(const std::string& firstName, const std::string& lastName, const std::string& patronymic, const std::string& birthDate, const std::string& deathDate)
-        : firstName(firstName), lastName(lastName), patronymic(patronymic), birthDate(birthDate), deathDate(deathDate), spouse(nullptr) {}
+        : firstName(firstName), lastName(lastName), patronymic(patronymic), birthDate(birthDate), deathDate(deathDate), spouse(nullptr) {
+    std::cout << "FamilyMember parameterized constructor called" << std::endl;
+}
 
 FamilyMember::FamilyMember(const FamilyMember& other)
-        : firstName(other.firstName), lastName(other.lastName), patronymic(other.patronymic), birthDate(other.birthDate), deathDate(other.deathDate), parents(other.parents), spouse(other.spouse), children(other.children) {}
+        : firstName(other.firstName), lastName(other.lastName), patronymic(other.patronymic), birthDate(other.birthDate), deathDate(other.deathDate), parents(other.parents), spouse(other.spouse), children(other.children) {
+    std::cout << "FamilyMember copy constructor called" << std::endl;
+}
 
-FamilyMember::~FamilyMember() {}
+FamilyMember::~FamilyMember() {
+    std::cout << "FamilyMember destructor called" << std::endl;
+}
 
 void FamilyMember::display() const {
     std::cout << "Name: " << firstName << " " << patronymic << " " << lastName << ", Birth Date: " << birthDate << ", Death Date: " << deathDate << ", Age: " << getAge() << std::endl;
@@ -175,6 +184,12 @@ int FamilyMember::calculateAge() const {
         ss >> std::get_time(&death, "%Y-%m-%d");
         if (ss.fail()) {
             throw std::runtime_error("Invalid death date format");
+        }
+
+        if (death.tm_year < birth.tm_year ||
+            (death.tm_year == birth.tm_year && death.tm_mon < birth.tm_mon) ||
+            (death.tm_year == birth.tm_year && death.tm_mon == birth.tm_mon && death.tm_mday < birth.tm_mday)) {
+            throw std::runtime_error("Death date cannot be earlier than birth date");
         }
 
         age = death.tm_year - birth.tm_year;

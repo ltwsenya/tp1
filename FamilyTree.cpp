@@ -3,13 +3,16 @@
 #include <stdexcept>
 #include <iostream>
 
-FamilyTree::FamilyTree() : members(nullptr), size(0), capacity(0) {}
+FamilyTree::FamilyTree() : members(nullptr), size(0), capacity(0) {
+    std::cout << "FamilyTree default constructor called" << std::endl;
+}
 
 FamilyTree::~FamilyTree() {
     for (int i = 0; i < size; ++i) {
         delete members[i];
     }
     delete[] members;
+    std::cout << "FamilyTree destructor called" << std::endl;
 }
 
 void FamilyTree::addMember(FamilyMember* member) {
@@ -47,6 +50,7 @@ void FamilyTree::saveToFile(const std::string& filename) const {
         out << std::endl;
     }
     out.close(); // Убедитесь, что файл закрыт после записи
+    std::cout << "Data successfully saved to file: " << filename << std::endl;
 }
 
 void FamilyTree::loadFromFile(const std::string& filename) {
