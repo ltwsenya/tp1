@@ -1,7 +1,6 @@
 #include "FamilyTree.h"
 #include "FamilyMember.h"
 #include <iostream>
-#include <chrono>
 #include <ctime>
 #include <iomanip>  // Добавляем этот заголовок для std::get_time
 #include <sstream>  // Для std::istringstream
@@ -14,7 +13,8 @@ void showMenu() {
     std::cout << "3. Display members" << std::endl;
     std::cout << "4. Save to file" << std::endl;
     std::cout << "5. Load from file" << std::endl;
-    std::cout << "6. Exit" << std::endl;
+    std::cout << "6. Edit member" << std::endl;
+    std::cout << "7. Exit" << std::endl;
 }
 
 // Функция для проверки корректности даты
@@ -176,12 +176,19 @@ int main() {
                 break;
             }
             case 6:
+                std::cout << "Enter index of member to edit: ";
+                int index;
+                std::cin >> index;
+                std::cin.ignore();
+                familyTree.editMember(index);
+                break;
+            case 7:
                 std::cout << "Exiting..." << std::endl;
                 break;
             default:
                 std::cout << "Invalid choice. Please try again." << std::endl;
         }
-    } while (choice != 6);
+    } while (choice != 7);
 
     return 0;
 }

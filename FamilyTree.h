@@ -13,6 +13,8 @@ public:
     void displayMembers() const;
     void saveToFile(const std::string& filename) const;
     void loadFromFile(const std::string& filename);
+    void editMember(int index);
+
 
 private:
     FamilyMember** members;
@@ -20,6 +22,8 @@ private:
     int capacity;
 
     void resize();
+    bool isDateValid(const std::string& date);
+    bool isBirthDateValid(const std::string& birthDate);
 };
 
 #endif // FAMILYTREE_H
